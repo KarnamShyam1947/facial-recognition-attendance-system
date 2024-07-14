@@ -1,8 +1,11 @@
+from dotenv import dotenv_values
 import face_recognition
 import mysql.connector
 import pickle as pkl
 import numpy as np
 import cv2
+
+secrets = dotenv_values(".env")
 
 insert_query = "INSERT INTO face_encodings(name, encoding) values(%s, %s)"
 load_query = "SELECT * FROM face_encodings"
@@ -11,11 +14,11 @@ def insert(file_path, name):
     print("insert.....")
 
     config = {
-        "host": "localhost",
-        "port": 3306,
-        "database": "face_attendance_system",
-        "user": "root",
-        "password": "",
+        "host": secrets['DB_HOST_URL'],
+        "port": secrets['DB_PORT'],
+        "database": secrets['DB_DATABASE'],
+        "user": secrets['DB_USERNAME'],
+        "password": secrets['DB_PASSWORD'],
         "charset": "utf8",
         "use_unicode": True,
         "get_warnings": True,

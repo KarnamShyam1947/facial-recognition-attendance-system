@@ -3,14 +3,17 @@ import cv2, os
 import numpy as np
 import mysql.connector
 import pickle as pkl
+from dotenv import load_dotenv
+
+secrets = load_dotenv(".env")
 
 load_query = "SELECT * FROM face_encodings"
 config = {
-    "host": "localhost",
-    "port": 3306,
-    "database": "face_attendance_system",
-    "user": "root",
-    "password": "",
+    "host": secrets['DB_HOST_URL'],
+    "port": secrets['DB_PORT'],
+    "database": secrets['DB_DATABASE'],
+    "user": secrets['DB_USERNAME'],
+    "password": secrets['DB_PASSWORD'],
     "charset": "utf8",
     "use_unicode": True,
     "get_warnings": True,
